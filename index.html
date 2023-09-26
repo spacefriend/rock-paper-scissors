@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Page Title</title>
+</head>
+<body>
+  <script>
+    let tally = 0;
+    let choiceArray = ['rock', 'paper', 'scissors'];
+    let playerSelection;
+    let computerSelection;
+    //create function that randomly returns 'rock', 'paper', or 'scissors'
+    function getComputerChoice(){
+        let computerSelection  = Math.floor(Math.random() * 3);
+        return choiceArray[computerSelection];
+
+    };
+    
+
+    //create function that plays a single round of rock paper scissors. Function will take two parameters (playerSelection, computerSelection)
+    function playRound(playerSelection, computerSelection){
+        if (playerSelection === computerSelection){
+            return "Your opponent picked " + computerSelection + ". It's a tie!";
+        }
+        else if (playerSelection === 'rock'){
+            if (computerSelection === 'scissors'){
+                tally += 1;
+                return "Your opponent picked scissors. You win!";
+            }
+            else{
+                return "Your opponent picked paper. You lose :("
+            };
+        }
+        else if (playerSelection === 'scissors'){
+            if (computerSelection === 'paper'){
+                tally += 1;
+                return "Your opponent picked paper. You win!";
+            }
+            else{
+                return "Your opponent picked rock. You lose :("
+            }
+        }
+        else if (playerSelection === 'paper'){
+            if (computerSelection === 'rock'){
+                tally += 1;
+                return "Your opponent picked rock. You win!";
+            }
+            else{
+                return "Your opponent picked scissors. You lose :("
+            }
+        };
+    };
+  
+    
+
+    //create a game function that loops for 5 rounds and keeps score
+
+    function game (){
+        tally = 0;
+        for (let i = 0; i < 5; i++){
+            playerSelection = prompt("Enter rock, paper, or scissors:");
+            playerSelection = playerSelection.toLowerCase();
+            const computerSelection = getComputerChoice();
+            console.log(playRound(playerSelection, computerSelection));
+            //playRound(playerSelection, computerSelection);
+
+
+        };
+        console.log("You won " + tally +"/5 games");
+    };
+    game();
+    
+
+
+  </script>
+</body>
+</html>
