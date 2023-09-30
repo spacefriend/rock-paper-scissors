@@ -5,51 +5,98 @@
   <title>Page Title</title>
 </head>
 <body>
+    <span id="playerTally"></span><span id="compTally"></span>
+    <br>
+    <br>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <div id="results"></div>
+
   <script>
-    let tally = 0;
+    let tallyPlayer = 0;
+    let tallyComp = 0;
     let choiceArray = ['rock', 'paper', 'scissors'];
     let playerSelection;
     let computerSelection;
+    const rockBtn = document.querySelector('#rock');
+    const paperBtn = document.querySelector('#paper');
+    const scissorsBtn = document.querySelector('#scissors');
+    const results = document.querySelector('#results');
+    const playerTally = document.querySelector('#playerTally');
+    const compTally = document.querySelector('#compTally');
     //create function that randomly returns 'rock', 'paper', or 'scissors'
     function getComputerChoice(){
         let computerSelection  = Math.floor(Math.random() * 3);
         return choiceArray[computerSelection];
 
     };
-    
+    rockBtn.addEventListener('click', () => {
+                playRound('rock');});
+    paperBtn.addEventListener('click', () => {
+                playRound('paper')});
+    scissorsBtn.addEventListener('click', () => {
+                playRound('scissors')});
 
     //create function that plays a single round of rock paper scissors. Function will take two parameters (playerSelection, computerSelection)
-    function playRound(playerSelection, computerSelection){
-        if (playerSelection === computerSelection){
-            return "Your opponent picked " + computerSelection + ". It's a tie!";
+    function playRound(playerSelection){
+        computerSelection = getComputerChoice();
+        console.log(playerSelection + " " + computerSelection);
+        if (playerSelection == computerSelection){
+            results.textContent = "Your opponent picked " + computerSelection + ". It's a tie!";
         }
-        else if (playerSelection === 'rock'){
-            if (computerSelection === 'scissors'){
-                tally += 1;
-                return "Your opponent picked scissors. You win!";
+        else if (playerSelection == 'rock'){
+            if (computerSelection == 'scissors'){
+                tallyPlayer++;
+                results.textContent = "Your opponent picked scissors. You win!";
+                
             }
             else{
-                return "Your opponent picked paper. You lose :("
+                tallyComp++;
+                results.textContent = "Your opponent picked paper. You lose :("
+                
             };
         }
         else if (playerSelection === 'scissors'){
             if (computerSelection === 'paper'){
-                tally += 1;
-                return "Your opponent picked paper. You win!";
+                tallyPlayer++;
+                results.textContent = "Your opponent picked paper. You win!";
+                
             }
             else{
-                return "Your opponent picked rock. You lose :("
+                tallyComp++;
+                results.textContent = "Your opponent picked rock. You lose :("
+                
             }
         }
         else if (playerSelection === 'paper'){
             if (computerSelection === 'rock'){
-                tally += 1;
-                return "Your opponent picked rock. You win!";
+                tallyPlayer++;
+                results.textContent = "Your opponent picked rock. You win!";
+                
             }
             else{
-                return "Your opponent picked scissors. You lose :("
+                tallyComp++;
+                results.textContent = "Your opponent picked scissors. You lose :("
+                
             }
         };
+        if (tallyPlayer < 5 && tallyComp < 5){
+        playerTally.textContent = "Wins: " + tallyPlayer + " ";
+        compTally.textContent = "Losses: " + tallyComp;
+        }else if (tallyPlayer >= 5){
+            playerTally.textContent = "Final Score: " + tallyPlayer + " - " + tallyComp;
+            compTally.textContent = " You win!!"
+            tallyPlayer = 0;
+            tallyComp = 0;
+
+        }else {
+            playerTally.textContent = "Final Score: " + tallyPlayer + " - " + tallyComp;
+            compTally.textContent = " You lose :("
+            tallyPlayer = 0;
+            tallyComp = 0;
+
+        }
     };
   
     
@@ -69,7 +116,7 @@
         };
         console.log("You won " + tally +"/5 games");
     };
-    game();
+    //game();
     
 
 
