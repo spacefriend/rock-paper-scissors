@@ -100,23 +100,6 @@
     };
   
     
-
-    //create a game function that loops for 5 rounds and keeps score
-
-    function game (){
-        tally = 0;
-        for (let i = 0; i < 5; i++){
-            playerSelection = prompt("Enter rock, paper, or scissors:");
-            playerSelection = playerSelection.toLowerCase();
-            const computerSelection = getComputerChoice();
-            console.log(playRound(playerSelection, computerSelection));
-            //playRound(playerSelection, computerSelection);
-
-
-        };
-        console.log("You won " + tally +"/5 games");
-    };
-    //game();
     
 
 
